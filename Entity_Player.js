@@ -3,8 +3,8 @@ function Entity_Player()
 	system.log("Constructing Player Entity...");
 	var self = this;
 	self.name = "player";
-	self.x = 975;
-	self.y = 250;
+	self.x = 1510;
+	self.y = 1024;
 	self.speed = 400;
 	self.heading = 0;//0=left, 1=right;
 	//Values for Physics

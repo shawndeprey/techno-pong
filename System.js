@@ -15,8 +15,8 @@ function System()
 	self.pauseWorld = true;
 	self.particleLevel = 5;
 	self.maxParticleLevel = 5;
-	self.cameraX = 500;
-	self.cameraY = 250;
+	self.cameraX = 1024;
+	self.cameraY = 1024;
 
   this.update = function()
   {
