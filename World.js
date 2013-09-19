@@ -13,6 +13,7 @@ function World()
 		system.log("Initializing World...");
 		self.initialized = true;
 		g.get('load')('map', 'javabomb');
+		camera.setPosition(system.cameraX, system.cameraY);
 	}
 
 	this.reset = function()
@@ -30,7 +31,12 @@ function World()
 
 	this.translateWorld = function()
 	{
-		if(system.designMode){camera.moveToPlayer(input.screenX, input.screenY);}else{camera.moveToPlayer(self.player.x, self.player.y);}
+		if(system.designMode){
+			camera.moveToPlayer(input.screenX, input.screenY);
+		} else {
+			camera.moveToPlayer(system.cameraX, system.cameraY);
+			//camera.moveToPlayer(self.player.x, self.player.y);
+		}
 		self.xOff = camera.x;
 		self.yOff = camera.y;
 	}

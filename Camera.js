@@ -2,8 +2,8 @@ function Camera()
 {
   system.log("Constructing Hex World Camera...");
   var self = this;
-  this.x = 0;
-	this.y = 0;
+  this.x = system.cameraX;
+	this.y = system.cameraY;
 	
 	this.setPosition = function(X, Y)
 	{

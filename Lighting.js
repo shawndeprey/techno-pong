@@ -165,6 +165,8 @@ function Light(NAME, X, Y, R, G, B, Brightness, Radius, Shader, SpecularFactor, 
 	self.isLight = true;
 	self.name = NAME;
 	self.type = 'light';
+	self.startX = X;
+	self.startY = Y;
 	self.worldX = X;
 	self.worldY = Y;
 	self.brightness = Brightness > lighting.dark ? lighting.dark : Brightness;
@@ -190,11 +192,13 @@ function Light(NAME, X, Y, R, G, B, Brightness, Radius, Shader, SpecularFactor, 
 	
 	this.setX = function(X)
 	{
+		self.worldX = X;
 		self.x = Math.round(X / lighting.resolution);
 	}
 	
 	this.setY = function(Y)
 	{
+		self.worldY = Y;
 		self.y = Math.round(Y / lighting.resolution);
 	}
 

@@ -41,8 +41,10 @@ function Physics()
 	{
 		for(var key in self.entities)
     {
-			self.entities[key].velocity = (self.entities[key].velocity >= self.terminalVelocity) ? self.terminalVelocity : (self.entities[key].velocity + (self.gravitationalAcceleration * clock.delta));
-			self.entities[key].y += self.entities[key].velocity * (clock.delta);
+    	if(self.entities[key].name != 'player') {
+    		self.entities[key].velocity = (self.entities[key].velocity >= self.terminalVelocity) ? self.terminalVelocity : (self.entities[key].velocity + (self.gravitationalAcceleration * clock.delta));
+				self.entities[key].y += self.entities[key].velocity * (clock.delta);
+    	}
 		}
 	}
 

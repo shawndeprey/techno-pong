@@ -3,14 +3,14 @@ function Entity_Player()
 	system.log("Constructing Player Entity...");
 	var self = this;
 	self.name = "player";
-	self.x = 500;
-	self.y = 0;
-	self.speed = 300;
+	self.x = 975;
+	self.y = 250;
+	self.speed = 400;
 	self.heading = 0;//0=left, 1=right;
 	//Values for Physics
 	self.stepSize = 0.25;
 	self.height = 128;
-	self.width = 48;
+	self.width = 32;
 	self.moving = false;
 	self.lightInteraction = true;
 
@@ -48,13 +48,15 @@ function Entity_Player()
 	this.doInput = function()
 	{
 		self.resetFunctionalVariables();
-		self.x += (input.key['right'] == 1) ? self.speed * clock.delta + self.setHeading(1) : 0;
-		self.x -= (input.key['left'] == 1) ? self.speed * clock.delta + self.setHeading(0) : 0;
-		((input.key['space'] == 1) && self.grounded) ? self.jump() : 0;
-		if(!self.moving && self.grounded){animate.setAnimation('idle');} 
+		//self.x += (input.key['right'] == 1) ? self.speed * clock.delta + self.setHeading(1) : 0;
+		//self.x -= (input.key['left'] == 1) ? self.speed * clock.delta + self.setHeading(0) : 0;
+		self.y -= (input.key['up'] == 1) ? self.speed * clock.delta + self.setHeading(0) : 0;
+		self.y += (input.key['down'] == 1) ? self.speed * clock.delta + self.setHeading(1) : 0;
+		//((input.key['space'] == 1) && self.grounded) ? self.jump() : 0;
+		/*if(!self.moving && self.grounded){animate.setAnimation('idle');} 
 		else if(self.moving && self.grounded){animate.setAnimation('run');}
 		else if(!self.grounded){animate.setAnimation('jump');}
-		if(system.debug){ self.y -= (input.key['up'] == 1) ? self.speed * clock.delta : 0; self.y += (input.key['down'] == 1) ? self.speed * clock.delta : 0; }
+		if(system.debug){ self.y -= (input.key['up'] == 1) ? self.speed * clock.delta : 0; self.y += (input.key['down'] == 1) ? self.speed * clock.delta : 0; }*/
 
 		//Test Particles
 		if(input.mouseLeft == 2){
@@ -69,7 +71,9 @@ function Entity_Player()
   }
 
 	this.draw = function()
-	{canvas.fillStyle = "rgb(255,255,255)";
+	{canvas.fillStyle = "rgb(255,0,255)";
+    canvas.fillRect(h.X(self.x - self.width / 2), h.Y(self.y - self.height / 2), self.width, self.height);
+    /*
 		if(self.heading == 1) {
 			canvas.drawImage(asset.tex[animate.currentTexture()], animate.left(), animate.top(), 128, 128, h.X(self.x - 64), h.Y(self.y - 64), 128, 128);
 		} else {
@@ -77,5 +81,6 @@ function Entity_Player()
 				canvas.drawImage(asset.tex[animate.currentTexture()], animate.left(), animate.top(), 128, 128, (h.X(self.x - 64) * -1) - 128, h.Y(self.y - 64), 128, 128);
 			canvas.scale(-1,1);
 		}
+		*/
 	}
 }
