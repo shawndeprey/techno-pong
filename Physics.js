@@ -41,7 +41,7 @@ function Physics()
 	{
 		for(var key in self.entities)
     {
-    	if(self.entities[key].name != 'player') {
+    	if(self.entities[key].name != 'player' && self.entities[key].name != 'ball'){
     		self.entities[key].velocity = (self.entities[key].velocity >= self.terminalVelocity) ? self.terminalVelocity : (self.entities[key].velocity + (self.gravitationalAcceleration * clock.delta));
 				self.entities[key].y += self.entities[key].velocity * (clock.delta);
     	}
@@ -73,6 +73,10 @@ function Physics()
 
 		for(var key in self.entities)
 		{
+			self.entities[key].collideLeft = false;
+			self.entities[key].collideRight = false;
+			self.entities[key].collideTop = false;
+			self.entities[key].collideBottom = false;
 			entityCheckLeft = (self.entities[key].x - (self.entities[key].width /  2));
 			entityCheckRight = (self.entities[key].x + (self.entities[key].width /  2));
 			entityCheckTop = (self.entities[key].y - (self.entities[key].height / 2));

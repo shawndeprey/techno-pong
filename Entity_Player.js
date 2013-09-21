@@ -3,23 +3,23 @@ function Entity_Player()
 	system.log("Constructing Player Entity...");
 	var self = this;
 	self.name = "player";
-	self.x = 1510;
+	self.x = 1502;
 	self.y = 1024;
 	self.speed = 400;
 	self.heading = 0;//0=left, 1=right;
 	//Values for Physics
 	self.stepSize = 0.25;
 	self.height = 128;
-	self.width = 32;
+	self.width = 16;
 	self.moving = false;
 	self.lightInteraction = true;
 
 	var animate = new Animation_Manager();
 	this.addAllEntityAnimations = function()
 	{
-		animate.addAnimation('run','player'/*tex*/,16/*start*/,25/*end*/,75/*tile-ms-time*/,128/*tile-size*/,1024/*sheet-size*/, true);
-		animate.addAnimation('idle','playerOld'/*tex*/,8/*start*/,11/*end*/,250/*tile-ms-time*/,128/*tile-size*/,1024/*sheet-size*/, true);
-		animate.addAnimation('jump','playerOld'/*tex*/,24/*start*/,31/*end*/,50/*tile-ms-time*/,128/*tile-size*/,1024/*sheet-size*/, false);
+		//animate.addAnimation('run','player'/*tex*/,16/*start*/,25/*end*/,75/*tile-ms-time*/,128/*tile-size*/,1024/*sheet-size*/, true);
+		//animate.addAnimation('idle','playerOld'/*tex*/,8/*start*/,11/*end*/,250/*tile-ms-time*/,128/*tile-size*/,1024/*sheet-size*/, true);
+		//animate.addAnimation('jump','playerOld'/*tex*/,24/*start*/,31/*end*/,50/*tile-ms-time*/,128/*tile-size*/,1024/*sheet-size*/, false);
 	};self.addAllEntityAnimations();
 
 	this.setPosition = function(X, Y)
@@ -60,7 +60,10 @@ function Entity_Player()
 
 		//Test Particles
 		if(input.mouseLeft == 2){
-			fx.addFX('explosion1', input.screenX, input.screenY, 3, 50, true, 'rgb(255,0,255)');
+			r = Math.round(Math.random() * 255);
+			g = Math.round(Math.random() * 255);
+			b = Math.round(Math.random() * 255);
+			fx.addFX('explosion1', input.screenX, input.screenY, 3, 50, false, 'rgb('+r+','+g+','+b+')');
 		}
 	}
 

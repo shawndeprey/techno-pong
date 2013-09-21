@@ -17,6 +17,7 @@ function System()
 	self.maxParticleLevel = 5;
 	self.cameraX = 1024;
 	self.cameraY = 1024;
+	self.techno_speed = 2;
 
   this.update = function()
   {
@@ -37,6 +38,8 @@ function System()
 		if(input.key['f7'] == 2){self.lights = !self.lights;}
 		if(input.key['f8'] == 2){self.lightEntityInteraction = !self.lightEntityInteraction;}
 		if(input.key['f9'] == 2){self.designMode = !self.designMode;}
+		if(input.key['l']  == 2){ self.techno_speed += self.techno_speed == 20 ? 0 : 1; }
+		if(input.key['k']  == 2){ self.techno_speed -= self.techno_speed ==  1 ? 0 : 1; }
     if(!self.designMode){
     	if(input.key['0'] == 2){lighting.resChange = true; lighting.resolution++;}
 	    if(input.key['9'] == 2){lighting.resChange = true; lighting.resolution -= lighting.resolution - 1 > 0 ? 1 : 0;}

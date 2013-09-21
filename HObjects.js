@@ -40,6 +40,9 @@ document.write('<script type="text/javascript" src="scripts/npc/InitializeAllNpc
 document.write('<script type="text/javascript" src="scripts/particle/InitializeAllFX.js"></script>');
 document.write('<script type="text/javascript" src="scripts/prop/InitializeAllProps.js"></script>');
 
+//Other
+document.write('<script type="text/javascript" src="Hex_Ball.js"></script>');
+
 //Maps
 document.write('<script type="text/javascript" src="res/map/Map_Manager.js"></script>');
 
