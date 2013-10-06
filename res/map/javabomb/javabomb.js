@@ -6,17 +6,26 @@ function map_javabomb()
 	self.width = 2;
 	self.tileSize = 1024;
 	self.ball = new Hex_Ball(1);
+	self.enemy = new Entity_CPU(1);
 
 	this.initialize = function(map)
 	{
-		physics.addCollisionArea('col1', 525, 1024, 485, 15);
-		physics.addCollisionArea('col2', 1524, 1024, 485, 15);
-		physics.addCollisionArea('col3', 1024, 774, 15, 1015);
-		physics.addCollisionArea('col4', 1024, 1274, 15, 1015);
+		physics.addCollisionArea('col1', 500, 1024, 565, 45); // Left
+		physics.addCollisionArea('col2', 1549, 1024, 565, 45); // Right
+		physics.addCollisionArea('col3', 1024, 759, 45, 1015); // Top
+		physics.addCollisionArea('col4', 1024, 1289, 45, 1015); // Bottom
+
+		// EventArea(NAME, X, Y, H, W, ACTIVE, ON_ENTER, ON_ACTION, ON_EXIT)
+		map.em.addEvent('cpu_score', 1525, 1024, 485, 15, true, 'cpu_score', 'null', 'null');
+		map.em.addEvent('player_score', 524, 1024, 485, 15, true, 'player_score', 'null', 'null');
+
 
 		self.ball.initialize();
 		world.addEntity(self.ball);
 		physics.addEntity(self.ball);
+
+		world.addEntity(self.enemy);
+		physics.addEntity(self.enemy);
 
 		var colorIntensity = 150;
 		var lightSpecular = 0.75;
@@ -81,7 +90,6 @@ function map_javabomb()
 		map.navi.addNode('node3', 800, 219, 32, 32, 2);
 		map.navi.addNode('node4', 1200, 300, 32, 32, 3);
 		map.navi.addNode('node5', 1450, 350, 32, 32, 4);
-		map.em.addEvent('endOfLevel', 1500, 340, 64, 100, true, 'endOfLevel1', 'null', 'null');
 		map.checkpoint.addCheckpoint('spot2', 700, 219, 32, 32, false);
 		map.checkpoint.addCheckpoint('start', 400, 219, 32, 32, true);
 		*/

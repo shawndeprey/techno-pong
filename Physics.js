@@ -41,7 +41,7 @@ function Physics()
 	{
 		for(var key in self.entities)
     {
-    	if(self.entities[key].name != 'player' && self.entities[key].name != 'ball'){
+    	if(self.entities[key].name != 'player' && self.entities[key].name != 'ball' && self.entities[key].name != 'cpu'){
     		self.entities[key].velocity = (self.entities[key].velocity >= self.terminalVelocity) ? self.terminalVelocity : (self.entities[key].velocity + (self.gravitationalAcceleration * clock.delta));
 				self.entities[key].y += self.entities[key].velocity * (clock.delta);
     	}
@@ -170,8 +170,43 @@ function Physics()
 				}
 			}
 				
-//Checkpoint Collisions
+// Player Collisions
 			if(self.entities[key].name == 'player') {
+	// I'm a dumbass
+				for(var ball_key in self.entities){
+					if(self.entities[ball_key].name == 'ball'){
+						collisionCheckRight = (self.entities[ball_key].x + (self.entities[ball_key].width / 2));
+						collisionCheckLeft = (self.entities[ball_key].x - (self.entities[ball_key].width / 2));
+						collisionCheckBottom = (self.entities[ball_key].y + (self.entities[ball_key].height / 2));
+						collisionCheckTop = (self.entities[ball_key].y - (self.entities[ball_key].height / 2));
+						if(entityCheckLeft<collisionCheckRight && entityCheckRight>collisionCheckLeft && entityCheckTop<collisionCheckBottom && entityCheckBottom>collisionCheckTop)
+						{
+							D_LEFT = Math.abs(entityCheckLeft - collisionCheckRight);
+							D_RIGHT = Math.abs(entityCheckRight - collisionCheckLeft);
+							D_TOP = Math.abs(entityCheckTop - collisionCheckBottom);
+							D_BOTTOM = Math.abs(entityCheckBottom - collisionCheckTop);
+							switch(Math.min(D_LEFT, D_RIGHT, D_TOP, D_BOTTOM)){
+								case D_LEFT:{ //Collision with left of entity
+									self.entities[ball_key].x = (self.entities[key].x - (self.entities[key].width / 2)) - self.entities[ball_key].width / 2;
+									self.entities[ball_key].collideRight = true;
+								break;}
+								case D_RIGHT:{ //Collision with right of entity
+									self.entities[ball_key].x = (self.entities[key].x + (self.entities[key].width / 2)) + self.entities[ball_key].width / 2;
+									self.entities[ball_key].collideLeft = true;
+								break;}
+								case D_TOP:{ //Collision with top of entity
+									self.entities[ball_key].y = (self.entities[key].y - (self.entities[key].height / 2)) - self.entities[ball_key].height / 2;
+									self.entities[ball_key].collideBottom = true;
+								break;}
+								case D_BOTTOM:{ //Collision with bottom of entity
+									self.entities[ball_key].y = (self.entities[key].y + (self.entities[key].height / 2)) + self.entities[ball_key].height / 2;
+									self.entities[ball_key].collideTop = true;
+								break;}
+							}
+						}
+					}
+				}
+	// Facking checkpoints
 				$.each(map.checkpoint.checkpoint, function(){
 					collisionCheckRight = (this.x + (this.width / 2));
 					collisionCheckLeft = (this.x - (this.width / 2));
@@ -182,23 +217,60 @@ function Physics()
 						map.checkpoint.onEnteredNode(this.name);
 					}
 				});
-//Event Collisions
-				$.each(map.em.events, function(){
-					if(this.active)
-					{
-						collisionCheckRight = (this.x + (this.width / 2));
-						collisionCheckLeft = (this.x - (this.width / 2));
-						collisionCheckBottom = (this.y + (this.height / 2));
-						collisionCheckTop = (this.y - (this.height / 2));
+			}
+
+			if(self.entities[key].name == 'cpu') {
+	// I'm a dumbass
+				for(var ball_key in self.entities){
+					if(self.entities[ball_key].name == 'ball'){
+						collisionCheckRight = (self.entities[ball_key].x + (self.entities[ball_key].width / 2));
+						collisionCheckLeft = (self.entities[ball_key].x - (self.entities[ball_key].width / 2));
+						collisionCheckBottom = (self.entities[ball_key].y + (self.entities[ball_key].height / 2));
+						collisionCheckTop = (self.entities[ball_key].y - (self.entities[ball_key].height / 2));
 						if(entityCheckLeft<collisionCheckRight && entityCheckRight>collisionCheckLeft && entityCheckTop<collisionCheckBottom && entityCheckBottom>collisionCheckTop)
 						{
-							map.em.onEnteredNode(this.name);
-						} else {
-							map.em.onExitNode(this.name);
+							D_LEFT = Math.abs(entityCheckLeft - collisionCheckRight);
+							D_RIGHT = Math.abs(entityCheckRight - collisionCheckLeft);
+							D_TOP = Math.abs(entityCheckTop - collisionCheckBottom);
+							D_BOTTOM = Math.abs(entityCheckBottom - collisionCheckTop);
+							switch(Math.min(D_LEFT, D_RIGHT, D_TOP, D_BOTTOM)){
+								case D_LEFT:{ //Collision with left of entity
+									self.entities[ball_key].x = (self.entities[key].x - (self.entities[key].width / 2)) - self.entities[ball_key].width / 2;
+									self.entities[ball_key].collideRight = true;
+								break;}
+								case D_RIGHT:{ //Collision with right of entity
+									self.entities[ball_key].x = (self.entities[key].x + (self.entities[key].width / 2)) + self.entities[ball_key].width / 2;
+									self.entities[ball_key].collideLeft = true;
+								break;}
+								case D_TOP:{ //Collision with top of entity
+									self.entities[ball_key].y = (self.entities[key].y - (self.entities[key].height / 2)) - self.entities[ball_key].height / 2;
+									self.entities[ball_key].collideBottom = true;
+								break;}
+								case D_BOTTOM:{ //Collision with bottom of entity
+									self.entities[ball_key].y = (self.entities[key].y + (self.entities[key].height / 2)) + self.entities[ball_key].height / 2;
+									self.entities[ball_key].collideTop = true;
+								break;}
+							}
 						}
 					}
-				});
+				}
 			}
+			//Event Collisions
+			$.each(map.em.events, function(){
+				if(this.active && self.entities[key].name == 'ball')
+				{
+					collisionCheckRight = (this.x + (this.width / 2));
+					collisionCheckLeft = (this.x - (this.width / 2));
+					collisionCheckBottom = (this.y + (this.height / 2));
+					collisionCheckTop = (this.y - (this.height / 2));
+					if(entityCheckLeft<collisionCheckRight && entityCheckRight>collisionCheckLeft && entityCheckTop<collisionCheckBottom && entityCheckBottom>collisionCheckTop)
+					{
+						map.em.onEnteredNode(this.name);
+					} else {
+						map.em.onExitNode(this.name);
+					}
+				}
+			});
 		}
 	}
 

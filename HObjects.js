@@ -42,6 +42,7 @@ document.write('<script type="text/javascript" src="scripts/prop/InitializeAllPr
 
 //Other
 document.write('<script type="text/javascript" src="Hex_Ball.js"></script>');
+document.write('<script type="text/javascript" src="Entity_CPU.js"></script>');
 
 //Maps
 document.write('<script type="text/javascript" src="res/map/Map_Manager.js"></script>');

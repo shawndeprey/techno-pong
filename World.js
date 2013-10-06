@@ -8,6 +8,10 @@ function World()
 	self.player = new Entity_Player();
 	self.initialized = false;
 
+	// Pong Shit
+	self.cpu_score = 0;
+	self.player_score = 0;
+
 	this.init = function()
 	{
 		system.log("Initializing World...");

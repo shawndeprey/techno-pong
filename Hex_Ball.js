@@ -5,7 +5,7 @@ function Hex_Ball(LEVEL)
 	self.x = 1024;
 	self.y = 1024;
 	self.level = LEVEL;
-	self.baseSpeed = 200;
+	self.baseSpeed = 300;
 	self.xSpeed = self.baseSpeed;
 	self.ySpeed = self.baseSpeed;
 	self.xHeading = Math.round(Math.random());//0=left, 1=right;
@@ -48,6 +48,13 @@ function Hex_Ball(LEVEL)
 
   this.update = function()
   {
+  	if(self.collideLeft || self.collideRight || self.collideTop || self.collideBottom){
+  		r = Math.round(Math.random() * 255);
+			g = Math.round(Math.random() * 255);
+			b = Math.round(Math.random() * 255);
+			fx.addFX('explosion1', self.x, self.y, 3, 50, false, 'rgb('+r+','+g+','+b+')');
+  	}
+
 		if(self.collideLeft || self.collideRight){
 			self.setSpeed();
 			self.xHeading = self.collideLeft ? 1 : 0;
@@ -56,7 +63,6 @@ function Hex_Ball(LEVEL)
 			self.decreaseYSpeed();
 			self.yHeading = self.collideTop ? 1 : 0;
 		}
-		console.log(self.x + " | " + self.y);
   	self.x += (self.xSpeed * (self.xHeading == 0 ? -1 : 1)) * clock.delta;
   	self.y += (self.ySpeed * (self.yHeading == 0 ? -1 : 1)) * clock.delta;
 		self.light.setX(self.x - 4);

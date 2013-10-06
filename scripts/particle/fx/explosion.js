@@ -1,5 +1,18 @@
 fxmanager.add('explosion1', function(){
-	num_particles = this.size * system.particleLevel;
+	num_particles = 15;
+	while(num_particles--){
+		X_VEL = ((Math.random() - 0.5) * 2.0 * 5.0) * 80;
+		Y_VEL = ((Math.random() - 0.5) * 2.0 * 5.0) * 80;
+		HEIGHT = (Math.random() + 0.5) * 5;
+		WIDTH = (Math.random() + 0.5) * 5;
+		LIFE = (this.life == -1) ? 3 : this.life;
+		this.parts.push(new Particle(this.asset_or_color, this.x, this.y, X_VEL, Y_VEL, HEIGHT, WIDTH, LIFE));
+	}
+	asset.playSFX('explode1');
+});
+
+fxmanager.add('explosion2', function(){
+	num_particles = 200;
 	while(num_particles--){
 		X_VEL = ((Math.random() - 0.5) * 2.0 * 5.0) * 80;
 		Y_VEL = ((Math.random() - 0.5) * 2.0 * 5.0) * 80;

@@ -9,7 +9,7 @@ function Entity_Player()
 	self.heading = 0;//0=left, 1=right;
 	//Values for Physics
 	self.stepSize = 0.25;
-	self.height = 128;
+	self.height = 96;
 	self.width = 16;
 	self.moving = false;
 	self.lightInteraction = true;

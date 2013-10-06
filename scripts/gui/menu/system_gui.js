@@ -39,6 +39,18 @@ function Initialize_System_Gui_Through_Api()
 		this.addBox(new Color_Box('showVolume', function(){return system.width - 75;}, function(){return 35;}, function(){return 5;}, function(){
 			return asset.masterVolume * 100;
 		},  100, 100, 100, 1));
+
+		// Game Score
+		// Text_Area(NAME, X, Y, WIDTH, LINE_HEIGHT, FONT, FONT_SIZE, LINES_PER_PAGE, R, G, B, A, CONTENT)
+		this.addText(new Text_Area('game_score', function(){return (system.width / 2) - 5;}, function(){return 50;}, function(){return 200;}, 24, 'Arial', '36px', 4, 255, 255, 255, 1, 
+			"|"
+		));
+		this.addText(new Text_Area('cpu_score', function(){return (system.width / 2) - 50;}, function(){return 50;}, function(){return 200;}, 24, 'Arial', '36px', 4, 255, 255, 255, 1, 
+			world.cpu_score+''
+		));
+		this.addText(new Text_Area('player_score', function(){return (system.width / 2) + 15;}, function(){return 50;}, function(){return 200;}, 24, 'Arial', '36px', 4, 255, 255, 255, 1, 
+			world.player_score+''
+		));
 	}));
 	gm.menu['system'].active = true;
 }
